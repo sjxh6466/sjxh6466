@@ -1,0 +1,157 @@
+ function startBot() {
+    const botToken = '6476084232:AAHznyNeN8twrUEa8e4zKe5esi93TIX7uTY'; 
+    const telegramAPI = 'https://api.telegram.org/bot' + botToken + '/';
+    
+    var response = UrlFetchApp.fetch(telegramAPI + 'setWebhook?url=' + ScriptApp.getService().getUrl());
+    Logger.log(response.getContentText());
+  }
+  
+  function doPost(e) {
+    const data = JSON.parse(e.postData.contents);
+    const message = data.message;
+    const chatId = message.chat.id;
+    const text = message.text;
+    parse_mode: "HTML"
+    
+    if (text === '/start') {
+      //start之后的信息以及按钮
+      const replyMarkup = {
+        inline_keyboard: [
+          [
+            { text: '双赢负责人', url: 'https://t.me/sy_145' },
+            { text: '公群频道', url: 'https://t.me/SY_341' }
+          ]
+        ]
+      };
+      sendReply(chatId, '欢迎使用双赢验群机器人！\n\n点击下方按钮选择操作：', replyMarkup);
+    } else if (message.chat.type === 'supergroup' && text === '验群') {
+      //验群消息下的按钮及连接
+      const replyMarkup1 = { //消息下按钮1
+        inline_keyboard: [
+           [
+            { text: '公群导航', url: 'https://t.me/sy_145' },
+            { text: '供需频道', url: 'https://t.me/@SY_187' },
+          ],
+          [
+            { text: '轰炸机', url: 'https://t.me/' },
+            { text: '收押负责人', url: 'https://t.me/sy_145' },
+          ]
+        ]
+      };
+      
+      const replyMarkup2 = { //消息下按钮2
+        inline_keyboard: [
+          [
+            { text: '上口客服', url: 'https://t.me/BLSJK88' },
+            { text: '公群导航', url: 'https://t.me/gydb_66' },
+          ]
+        ]
+      };
+          const replyMarkup3 = { //消息下按钮3
+        inline_keyboard: [
+          [
+            { text: '上口客服', url: 'https://t.me/KuKu337' },
+            { text: '公群导航', url: 'https://t.me/gydb_66' },
+          ]
+        ]
+      };
+      const supergroupId = message.chat.username;
+      
+      //验证添加群部分 每个群的文案不同
+      if (supergroupId === 'cxsa14') { //这里填不同群的群名字就是@后面的那个
+       const text =  '<b>✅ 官方群认证</b>\n\n'
+          + '<code><b>ID:</b> -1001920922422</code>\n'
+          + '<code><b>名称:</b>公群3761晚曦手机口双赢上押3888u</code>\n'
+          + '<code><b>押金:</b> 3888</code> U\n'
+          + '<code><b>群编号:</b> 3761</code>\n'
+          + '<code><b>群状态:</b> 已上押</code>\n'
+          + '<code><b>标签:</b> 手机口类一区</code>\n'
+          + '<code><b>描述:</b> 未设置描述！</code>\n\n'
+          + '🔰 此群为双赢交易官方群!';
+        
+        sendReply(chatId, text, replyMarkup1);
+      } else if (supergroupId === 'wanxi66') {
+        const text = '<b>✅ 官方群认证</b>\n\n'
+          + '<code><b>ID:</b> -1001920922422</code>\n'
+          + '<code><b>名称:</b>公群3761晚曦手机口双赢上押3888u</code>\n'
+          + '<code><b>押金:</b> 3888</code> U\n'
+          + '<code><b>群编号:</b> 3761</code>\n'
+          + '<code><b>群状态:</b> 已上押</code>\n'
+          + '<code><b>标签:</b> 手机口类一区</code>\n'
+          + '<code><b>描述:</b> 未设置描述！</code>\n\n'
+          + '🔰 此群为双赢交易官方群!';
+        
+        sendReply(chatId, text, replyMarkup1);
+      }  else if (supergroupId === 'fadfad552') {
+        const text = '<b>✅ 官方群认证</b>\n\n'
+          + '<code><b>ID:</b> -1001920922422</code>\n'
+          + '<code><b>名称:</b>公群3761晚曦出售各种国外公司3888u</code>\n'
+          + '<code><b>押金:</b> 3888</code> U\n'
+          + '<code><b>群编号:</b> 3761</code>\n'
+          + '<code><b>群状态:</b> 已上押</code>\n'
+          + '<code><b>标签:</b> 其他类</code>\n'
+          + '<code><b>描述:</b> 未设置描述！</code>\n\n'
+          + '🔰 此群为双赢交易官方群!';
+        
+      sendReply(chatId, text, replyMarkup1);
+      }  else if (supergroupId === 'lelezuhao1') {
+        const text ='<b>✅ 官方群认证</b>\n\n'
+          + '<code><b>ID:</b> -1001920922423</code>\n'
+          + '<code><b>名称:</b>公群1531乐乐租q双赢上押5000u</code>\n'
+          + '<code><b>押金:</b> 5000</code> U\n'
+          + '<code><b>群编号:</b> 1531</code>\n'
+          + '<code><b>群状态:</b> 已上押</code>\n'
+          + '<code><b>标签:</b> 租Q类</code>\n'
+          + '<code><b>描述:</b> 未设置描述！</code>\n\n'
+          + '🔰 此群为双赢交易官方群!';
+        
+		  
+		  
+        sendReply(chatId,text , replyMarkup1);
+      }else {
+
+        sendReply(chatId, '非双赢公群', replyMarkup1);
+      }
+    } else if (message.chat.type === 'supergroup' && text === '开始') { //用户私聊机器人发送验群的时候的自动回复
+      sendReply(chatId, '创建成功,本群信息已录入数据库');
+ }  
+ else if (message.chat.type === 'supergroup' && text === '上课') { //用户私聊机器人发送验群的时候的自动回复
+      sendReply(chatId, '已上课');
+      }  
+       else if (message.chat.type === 'supergroup' && text === '下课') { //用户私聊机器人发送验群的时候的自动回复
+      sendReply(chatId, '已下课'); 
+      } 
+else if (message.chat.type === 'supergroup' && text === '设置押金 2888') { 
+      sendReply(chatId, '成功设置押金：2888');
+
+ }  else if (message.chat.type === 'supergroup' && text === '设置编号 2647') { 
+      sendReply(chatId, '成功设置编号：2647');
+
+ }  else if (message.chat.type === 'supergroup' && text === '设置标签 手机口类一区') {
+      sendReply(chatId, '成功设置标签：手机口类一区');
+
+ }  else if (message.chat.type === 'supergroup' && text === '') { 
+      sendReply(chatId, '创建成功,本群信息已录入数据库');
+
+ }  else if (message.chat.type === 'supergroup' && text === '') {
+      sendReply(chatId, '创建成功,本群信息已录入数据库');
+ }  
+ } 
+  
+  function sendReply(chatId, text, replyMarkup) {
+    const botToken = '6476084232:AAHznyNeN8twrUEa8e4zKe5esi93TIX7uTY'; //同样是bottoken
+    const telegramAPI = 'https://api.telegram.org/bot' + botToken + '/';
+    
+    const payload = {
+      method: 'post',
+      contentType: 'application/json',
+      payload: JSON.stringify({
+        chat_id: chatId,
+        text: text,
+        parse_mode: 'HTML',
+        reply_markup: replyMarkup
+      })
+    };
+    
+    UrlFetchApp.fetch(telegramAPI + 'sendMessage', payload);
+  }
